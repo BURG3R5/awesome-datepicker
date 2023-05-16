@@ -1,17 +1,18 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
+
+import 'picker.dart';
 
 Future<DateTime?> showAwesomeDatePicker({
   required BuildContext context,
   required DateTime initialDate,
-  required DateTime firstDate,
-  required DateTime lastDate,
-  // TODO: required bool babyMode,
-  // TODO: required bool useAlphaForCentury,
+  required bool babyMode,
+  required bool useAlpha,
+  required Color backgroundColor,
   DateTime? currentDate,
   String? helpText,
   Locale? locale,
+  double pickerHeight = 250,
+  double ringStrokeWidth = 20,
   bool useRootNavigator = true,
   RouteSettings? routeSettings,
   TransitionBuilder? builder,
@@ -19,29 +20,18 @@ Future<DateTime?> showAwesomeDatePicker({
   Offset? anchorPoint,
 }) async {
   initialDate = DateUtils.dateOnly(initialDate);
-  firstDate = DateUtils.dateOnly(firstDate);
-  lastDate = DateUtils.dateOnly(lastDate);
-  assert(
-    !lastDate.isBefore(firstDate),
-    'lastDate $lastDate must be on or after firstDate $firstDate.',
-  );
-  assert(
-    !initialDate.isBefore(firstDate),
-    'initialDate $initialDate must be on or after firstDate $firstDate.',
-  );
-  assert(
-    !initialDate.isAfter(lastDate),
-    'initialDate $initialDate must be on or before lastDate $lastDate.',
-  );
   assert(debugCheckHasMaterialLocalizations(context));
 
   Widget dialog = _AwesomeDatePickerDialog(
     initialDate: initialDate,
-    firstDate: firstDate,
-    lastDate: lastDate,
     currentDate: currentDate,
     helpText: helpText,
     errorInvalidText: errorInvalidText,
+    babyMode: babyMode,
+    useAlpha: useAlpha,
+    backgroundColor: backgroundColor,
+    pickerHeight: pickerHeight,
+    ringStrokeWidth: ringStrokeWidth,
   );
 
   if (locale != null) {
@@ -64,29 +54,32 @@ Future<DateTime?> showAwesomeDatePicker({
 class _AwesomeDatePickerDialog extends StatefulWidget {
   /// A Material-style date picker dialog.
   _AwesomeDatePickerDialog({
-    // TODO: required this.babyMode,
-    // TODO: required this.useAlphaForCentury,
+    required this.babyMode,
+    required this.useAlpha,
     required DateTime initialDate,
-    required DateTime firstDate,
-    required DateTime lastDate,
     DateTime? currentDate,
     this.helpText,
     this.errorInvalidText,
+    required this.backgroundColor,
+    this.pickerHeight = 250,
+    this.ringStrokeWidth = 20,
     Key? key,
   })  : initialDate = DateUtils.dateOnly(initialDate),
-        firstDate = DateUtils.dateOnly(firstDate),
-        lastDate = DateUtils.dateOnly(lastDate),
         currentDate = DateUtils.dateOnly(currentDate ?? DateTime.now()),
         super(key: key);
 
+  final double pickerHeight;
+
+  final double ringStrokeWidth;
+
+  final bool babyMode;
+
+  final bool useAlpha;
+
+  final Color backgroundColor;
+
   /// The initially selected [DateTime] that the picker should display.
   final DateTime initialDate;
-
-  /// The earliest allowable [DateTime] that the user can select.
-  final DateTime firstDate;
-
-  /// The latest allowable [DateTime] that the user can select.
-  final DateTime lastDate;
 
   /// The [DateTime] representing today. It will be highlighted in the day grid.
   final DateTime currentDate;
@@ -117,57 +110,27 @@ class _AwesomeDatePickerDialogState extends State<_AwesomeDatePickerDialog> {
 
   @override
   Widget build(BuildContext context) {
-    final double textScaleFactor =
-        min(MediaQuery.of(context).textScaleFactor, 1.3);
-
-    final Widget actions = Container(
-      alignment: AlignmentDirectional.centerEnd,
-      constraints: const BoxConstraints(minHeight: 52),
-      padding: const EdgeInsets.symmetric(horizontal: 8),
-      child: OverflowBar(
-        spacing: 8,
-        children: <IconButton>[
-          IconButton(
-            onPressed: () => Navigator.pop(context),
-            icon: const Icon(Icons.cancel_outlined),
-          ),
-          IconButton(
-            onPressed: () => Navigator.pop(context, _selectedDate),
-            icon: const Icon(Icons.save_outlined),
-          ),
-        ],
-      ),
-    );
-
     return Dialog(
-      insetPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
       clipBehavior: Clip.antiAlias,
-      child: AnimatedContainer(
-        width: 330 * textScaleFactor,
-        height: 350 * textScaleFactor,
-        duration: const Duration(milliseconds: 200),
-        curve: Curves.easeIn,
-        child: MediaQuery(
-          data: MediaQuery.of(context).copyWith(
-            textScaleFactor: textScaleFactor,
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Expanded(
-                child: CalendarDatePicker(
-                  key: _pickerKey,
-                  initialDate: _selectedDate,
-                  firstDate: widget.firstDate,
-                  lastDate: widget.lastDate,
-                  currentDate: widget.currentDate,
-                  onDateChanged: _handleDateChanged,
-                ),
-              ),
-              actions,
-            ],
-          ),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(
+          widget.pickerHeight * 2,
+        ),
+      ),
+      backgroundColor: widget.backgroundColor,
+      child: SizedBox(
+        width: widget.pickerHeight * 1.12,
+        height: widget.pickerHeight * 1.12,
+        child: AwesomeDatePicker(
+          key: _pickerKey,
+          initialDate: _selectedDate,
+          babyMode: widget.babyMode,
+          useAlpha: widget.useAlpha,
+          backgroundColor: widget.backgroundColor,
+          currentDate: widget.currentDate,
+          onDateChanged: _handleDateChanged,
+          colorPickerHeight: widget.pickerHeight,
+          hueRingStrokeWidth: widget.ringStrokeWidth,
         ),
       ),
     );

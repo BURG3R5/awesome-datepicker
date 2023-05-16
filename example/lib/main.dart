@@ -23,7 +23,12 @@ class ExampleHome extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('Awesome DatePicker Demo')),
       body: Center(
-        child: AwesomeDatePickerField(),
+        child: AwesomeDatePickerField(
+          pickerHeight: 250,
+          babyMode: true,
+          useAlpha: true,
+          backgroundColor: Colors.transparent,
+        ),
       ),
     );
   }

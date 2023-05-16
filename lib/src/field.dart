@@ -8,8 +8,6 @@ class AwesomeDatePickerField extends FormField<String> {
   AwesomeDatePickerField({
     Key? key,
     this.controller,
-    this.firstDate,
-    this.lastDate,
     this.initialDate,
     this.dateMask,
     this.icon,
@@ -24,6 +22,11 @@ class AwesomeDatePickerField extends FormField<String> {
     this.locale,
     this.useRootNavigator = false,
     this.routeSettings,
+    required this.babyMode,
+    required this.useAlpha,
+    required this.backgroundColor,
+    this.pickerHeight = 250,
+    this.ringStrokeWidth = 20,
     String? initialValue,
     FocusNode? focusNode,
     InputDecoration? decoration,
@@ -173,11 +176,15 @@ class AwesomeDatePickerField extends FormField<String> {
   /// The value need to be a DateTime String or null
   final TextEditingController? controller;
 
-  /// The earliest allowable [DateTime] that the user can select.
-  final DateTime? firstDate;
+  final double pickerHeight;
 
-  /// The latest allowable [DateTime] that the user can select.
-  final DateTime? lastDate;
+  final double ringStrokeWidth;
+
+  final bool babyMode;
+
+  final bool useAlpha;
+
+  final Color backgroundColor;
 
   /// The initial date to be used for the date picker if initialValue is null or empty
   final DateTime? initialDate;
@@ -407,10 +414,13 @@ class _AwesomeDatePickerState extends FormFieldState<String> {
     final ldDatePicked = await showAwesomeDatePicker(
       context: context,
       initialDate: _dDate,
-      firstDate: widget.firstDate ?? DateTime.now(),
-      lastDate: widget.lastDate ?? DateTime.now(),
       helpText: widget.calendarTitle,
       errorInvalidText: widget.errorInvalidText,
+      babyMode: widget.babyMode,
+      useAlpha: widget.useAlpha,
+      backgroundColor: widget.backgroundColor,
+      pickerHeight: widget.pickerHeight,
+      ringStrokeWidth: widget.ringStrokeWidth,
       locale: widget.locale,
       useRootNavigator: widget.useRootNavigator,
       routeSettings: widget.routeSettings,
