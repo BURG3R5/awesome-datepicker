@@ -68,10 +68,24 @@ class _AwesomeDatePickerState extends State<AwesomeDatePicker> {
     setState(() => currentColor = color);
     widget.onDateChanged(
       currentColor.toDate(
-        babyMode: widget.babyMode,
+        mode: widget.mode,
         enableAlpha: widget.useAlpha,
       ),
     );
+  }
+
+  void _timeTravel({required int days}) {
+    final nextDay = currentColor
+        .toDate(mode: widget.mode, enableAlpha: widget.useAlpha)
+        .add(Duration(days: days));
+
+    setState(() {
+      currentColor = nextDay.toHSVColor(
+        mode: widget.mode,
+        enableAlpha: widget.useAlpha,
+      );
+    });
+    widget.onDateChanged(nextDay);
   }
 
   @override
@@ -113,6 +127,38 @@ class _AwesomeDatePickerState extends State<AwesomeDatePicker> {
               child: AlphaSlider(currentColor, onColorChanging),
             ),
           ),
+        Positioned(
+          left: widget.colorPickerHeight / 7.5,
+          child: InkWell(
+            borderRadius: BorderRadius.circular(
+              widget.hueRingStrokeWidth * 4,
+            ),
+            onTap: () => _timeTravel(days: -1),
+            child: Icon(
+              Icons.arrow_left,
+              size: widget.hueRingStrokeWidth * 2,
+              color: useWhiteForeground(widget.backgroundColor)
+                  ? Colors.white
+                  : Colors.black,
+            ),
+          ),
+        ),
+        Positioned(
+          right: widget.colorPickerHeight / 7.5,
+          child: InkWell(
+            borderRadius: BorderRadius.circular(
+              widget.hueRingStrokeWidth * 4,
+            ),
+            onTap: () => _timeTravel(days: 1),
+            child: Icon(
+              Icons.arrow_right,
+              size: widget.hueRingStrokeWidth * 2,
+              color: useWhiteForeground(widget.backgroundColor)
+                  ? Colors.white
+                  : Colors.black,
+            ),
+          ),
+        ),
         Positioned(
           top: widget.colorPickerHeight / 6.5,
           child: Output(
