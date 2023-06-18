@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../enums.dart';
 import '../utils/get_foreground_theme.dart';
 import '../utils/translate_color_date.dart';
 
 class Output extends StatelessWidget {
   const Output(
     this.color, {
-    required this.babyMode,
+    required this.mode,
     required this.enableAlpha,
     required this.backgroundColor,
     Key? key,
   }) : super(key: key);
 
   final Color color;
-  final bool babyMode;
+  final AwesomeDatePickerMode mode;
   final bool enableAlpha;
   final Color backgroundColor;
 
@@ -22,7 +23,7 @@ class Output extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       DateFormat("d MMM y").format(color.toDate(
-        babyMode: babyMode,
+        mode: mode,
         enableAlpha: enableAlpha,
       )),
       style: TextStyle(

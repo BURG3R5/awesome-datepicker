@@ -25,7 +25,7 @@ class ExampleHome extends StatelessWidget {
       body: Center(
         child: AwesomeDatePickerField(
           pickerHeight: 250,
-          babyMode: true,
+          mode: AwesomeDatePickerMode.hex,
           useAlpha: true,
           backgroundColor: Colors.transparent,
         ),

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
+import 'enums.dart';
 import 'picker.dart';
 
 Future<DateTime?> showAwesomeDatePicker({
   required BuildContext context,
   required DateTime initialDate,
-  required bool babyMode,
+  required AwesomeDatePickerMode mode,
   required bool useAlpha,
   required Color backgroundColor,
   DateTime? currentDate,
@@ -27,7 +28,7 @@ Future<DateTime?> showAwesomeDatePicker({
     currentDate: currentDate,
     helpText: helpText,
     errorInvalidText: errorInvalidText,
-    babyMode: babyMode,
+    mode: mode,
     useAlpha: useAlpha,
     backgroundColor: backgroundColor,
     pickerHeight: pickerHeight,
@@ -54,7 +55,7 @@ Future<DateTime?> showAwesomeDatePicker({
 class _AwesomeDatePickerDialog extends StatefulWidget {
   /// A Material-style date picker dialog.
   _AwesomeDatePickerDialog({
-    required this.babyMode,
+    required this.mode,
     required this.useAlpha,
     required DateTime initialDate,
     DateTime? currentDate,
@@ -72,7 +73,7 @@ class _AwesomeDatePickerDialog extends StatefulWidget {
 
   final double ringStrokeWidth;
 
-  final bool babyMode;
+  final AwesomeDatePickerMode mode;
 
   final bool useAlpha;
 
@@ -124,7 +125,7 @@ class _AwesomeDatePickerDialogState extends State<_AwesomeDatePickerDialog> {
         child: AwesomeDatePicker(
           key: _pickerKey,
           initialDate: _selectedDate,
-          babyMode: widget.babyMode,
+          mode: widget.mode,
           useAlpha: widget.useAlpha,
           backgroundColor: widget.backgroundColor,
           currentDate: widget.currentDate,

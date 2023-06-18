@@ -1,17 +1,19 @@
-import 'package:awesome_datepicker/src/utils/translate_color_date.dart';
 import 'package:flutter/material.dart';
 
 import 'components/hue_ring.dart';
 import 'components/output.dart';
 import 'components/slider.dart';
 import 'components/sv_rect.dart';
+import 'enums.dart';
+import 'utils/get_foreground_theme.dart';
+import 'utils/translate_color_date.dart';
 
 class AwesomeDatePicker extends StatefulWidget {
   AwesomeDatePicker({
     required DateTime initialDate,
     DateTime? currentDate,
     required this.onDateChanged,
-    required this.babyMode,
+    required this.mode,
     required this.useAlpha,
     required this.backgroundColor,
     this.pickerAreaBorderRadius = const BorderRadius.all(Radius.zero),
@@ -21,7 +23,7 @@ class AwesomeDatePicker extends StatefulWidget {
   })  : initialDate = DateUtils.dateOnly(initialDate),
         currentDate = DateUtils.dateOnly(currentDate ?? DateTime.now()) {
     pickerColor = initialDate.toColor(
-      babyMode: babyMode,
+      mode: mode,
       enableAlpha: useAlpha,
     );
   }
@@ -29,7 +31,8 @@ class AwesomeDatePicker extends StatefulWidget {
   late final Color pickerColor;
   final double colorPickerHeight;
   final double hueRingStrokeWidth;
-  final bool babyMode, useAlpha;
+  final AwesomeDatePickerMode mode;
+  final bool useAlpha;
   final Color backgroundColor;
   final BorderRadius pickerAreaBorderRadius;
 
@@ -51,14 +54,14 @@ class _AwesomeDatePickerState extends State<AwesomeDatePicker> {
 
   @override
   void initState() {
-    currentColor = HSVColor.fromColor(widget.pickerColor);
+    currentColor = widget.pickerColor.toHSVColor();
     super.initState();
   }
 
   @override
   void didUpdateWidget(AwesomeDatePicker oldWidget) {
     super.didUpdateWidget(oldWidget);
-    currentColor = HSVColor.fromColor(widget.pickerColor);
+    currentColor = widget.pickerColor.toHSVColor();
   }
 
   void onColorChanging(HSVColor color) {
@@ -114,7 +117,7 @@ class _AwesomeDatePickerState extends State<AwesomeDatePicker> {
           top: widget.colorPickerHeight / 6.5,
           child: Output(
             currentColor.toColor(),
-            babyMode: widget.babyMode,
+            mode: widget.mode,
             enableAlpha: widget.useAlpha,
             backgroundColor: widget.backgroundColor,
           ),

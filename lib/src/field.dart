@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
 import 'dialog.dart';
+import 'enums.dart';
 
 class AwesomeDatePickerField extends FormField<String> {
   AwesomeDatePickerField({
@@ -22,7 +23,7 @@ class AwesomeDatePickerField extends FormField<String> {
     this.locale,
     this.useRootNavigator = false,
     this.routeSettings,
-    required this.babyMode,
+    required this.mode,
     required this.useAlpha,
     required this.backgroundColor,
     this.pickerHeight = 250,
@@ -180,7 +181,7 @@ class AwesomeDatePickerField extends FormField<String> {
 
   final double ringStrokeWidth;
 
-  final bool babyMode;
+  final AwesomeDatePickerMode mode;
 
   final bool useAlpha;
 
@@ -416,7 +417,7 @@ class _AwesomeDatePickerState extends FormFieldState<String> {
       initialDate: _dDate,
       helpText: widget.calendarTitle,
       errorInvalidText: widget.errorInvalidText,
-      babyMode: widget.babyMode,
+      mode: widget.mode,
       useAlpha: widget.useAlpha,
       backgroundColor: widget.backgroundColor,
       pickerHeight: widget.pickerHeight,
