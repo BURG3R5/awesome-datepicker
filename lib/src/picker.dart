@@ -77,7 +77,8 @@ class _AwesomeDatePickerState extends State<AwesomeDatePicker> {
   void _timeTravel({required int days}) {
     final nextDay = currentColor
         .toDate(mode: widget.mode, enableAlpha: widget.useAlpha)
-        .add(Duration(days: days));
+        .add(Duration(days: days))
+        .copyWith(hour: 12, minute: 0, second: 0);
 
     setState(() {
       currentColor = nextDay.toHSVColor(

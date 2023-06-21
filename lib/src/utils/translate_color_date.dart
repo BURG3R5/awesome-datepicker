@@ -12,7 +12,7 @@ extension Calendar on Color {
     switch (mode) {
       case AwesomeDatePickerMode.hex:
         return DateTime.fromMillisecondsSinceEpoch(
-          value * DateTime(3000).millisecondsSinceEpoch ~/ 0xFFFFFFFF,
+          value * DateTime(2100).millisecondsSinceEpoch ~/ 0xFFFFFFFF,
         );
       case AwesomeDatePickerMode.hsv:
       case AwesomeDatePickerMode.rgb:
@@ -45,7 +45,7 @@ extension Palette on DateTime {
         return Color(
           millisecondsSinceEpoch *
               0xFFFFFFFF ~/
-              DateTime(3000).millisecondsSinceEpoch,
+              DateTime(2100).millisecondsSinceEpoch,
         ).toHSVColor();
       case AwesomeDatePickerMode.hsv:
       case AwesomeDatePickerMode.rgb:
