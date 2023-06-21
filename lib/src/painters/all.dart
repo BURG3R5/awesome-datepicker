@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-import '../utils/get_foreground_theme.dart';
+import '../utils/color.dart';
 
 part 'hue_ring.dart';
 part 'indicator.dart';

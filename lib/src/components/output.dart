@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../enums.dart';
-import '../utils/get_foreground_theme.dart';
-import '../utils/translate_color_date.dart';
+import '../utils/color.dart';
 
 class Output extends StatelessWidget {
   const Output(
@@ -26,10 +25,7 @@ class Output extends StatelessWidget {
         mode: mode,
         enableAlpha: enableAlpha,
       )),
-      style: TextStyle(
-          color: useWhiteForeground(backgroundColor)
-              ? Colors.white
-              : Colors.black),
+      style: TextStyle(color: backgroundColor.getForeground()),
     );
   }
 }

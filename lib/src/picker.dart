@@ -5,8 +5,8 @@ import 'components/output.dart';
 import 'components/slider.dart';
 import 'components/sv_rect.dart';
 import 'enums.dart';
-import 'utils/get_foreground_theme.dart';
-import 'utils/translate_color_date.dart';
+import 'utils/color.dart';
+import 'utils/date.dart';
 
 class AwesomeDatePicker extends StatefulWidget {
   AwesomeDatePicker({
@@ -138,9 +138,7 @@ class _AwesomeDatePickerState extends State<AwesomeDatePicker> {
             child: Icon(
               Icons.arrow_left,
               size: widget.hueRingStrokeWidth * 2,
-              color: useWhiteForeground(widget.backgroundColor)
-                  ? Colors.white
-                  : Colors.black,
+              color: widget.backgroundColor.getForeground(),
             ),
           ),
         ),
@@ -154,9 +152,7 @@ class _AwesomeDatePickerState extends State<AwesomeDatePicker> {
             child: Icon(
               Icons.arrow_right,
               size: widget.hueRingStrokeWidth * 2,
-              color: useWhiteForeground(widget.backgroundColor)
-                  ? Colors.white
-                  : Colors.black,
+              color: widget.backgroundColor.getForeground(),
             ),
           ),
         ),

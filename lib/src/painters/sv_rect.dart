@@ -33,10 +33,7 @@ class SVRectPainter extends CustomPainter {
           size.width * hsvColor.saturation, size.height * (1 - hsvColor.value)),
       size.height * 0.04,
       Paint()
-        ..color = pointerColor ??
-            (useWhiteForeground(hsvColor.toColor())
-                ? Colors.white
-                : Colors.black)
+        ..color = pointerColor ?? hsvColor.toColor().getForeground()
         ..strokeWidth = 1.5
         ..style = PaintingStyle.stroke,
     );
