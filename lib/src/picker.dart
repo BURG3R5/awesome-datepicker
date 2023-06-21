@@ -20,8 +20,8 @@ class AwesomeDatePicker extends StatefulWidget {
     required this.colorPickerHeight,
     required this.hueRingStrokeWidth,
     super.key,
-  })  : initialDate = DateUtils.dateOnly(initialDate),
-        currentDate = DateUtils.dateOnly(currentDate ?? DateTime.now()) {
+  })  : initialDate = initialDate.dateOnly(),
+        currentDate = (currentDate ?? DateTime.now()).dateOnly() {
     pickerColor = initialDate.toColor(
       mode: mode,
       enableAlpha: useAlpha,
@@ -78,7 +78,7 @@ class _AwesomeDatePickerState extends State<AwesomeDatePicker> {
     final nextDay = currentColor
         .toDate(mode: widget.mode, enableAlpha: widget.useAlpha)
         .add(Duration(days: days))
-        .copyWith(hour: 12, minute: 0, second: 0);
+        .dateOnly();
 
     setState(() {
       currentColor = nextDay.toHSVColor(

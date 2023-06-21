@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'enums.dart';
 import 'picker.dart';
+import 'utils/date.dart';
 
 Future<DateTime?> showAwesomeDatePicker({
   required BuildContext context,
@@ -21,7 +22,7 @@ Future<DateTime?> showAwesomeDatePicker({
   String? errorInvalidText,
   Offset? anchorPoint,
 }) async {
-  initialDate = DateUtils.dateOnly(initialDate);
+  initialDate = initialDate.dateOnly();
   assert(debugCheckHasMaterialLocalizations(context));
 
   Widget dialog = _AwesomeDatePickerDialog(
@@ -68,8 +69,8 @@ class _AwesomeDatePickerDialog extends StatefulWidget {
     this.pickerHeight = 250,
     this.ringStrokeWidth = 20,
     Key? key,
-  })  : initialDate = DateUtils.dateOnly(initialDate),
-        currentDate = DateUtils.dateOnly(currentDate ?? DateTime.now()),
+  })  : initialDate = initialDate.dateOnly(),
+        currentDate = (currentDate ?? DateTime.now()).dateOnly(),
         super(key: key);
 
   final double pickerHeight;

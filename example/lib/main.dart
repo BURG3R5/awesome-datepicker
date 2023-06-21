@@ -34,7 +34,6 @@ class Home extends StatelessWidget {
       mode: AwesomeDatePickerMode.hex,
       useAlpha: true,
       initialDate: DateTime.now(),
-      // TODO: UTC/IST bug
       backgroundColor: Colors.transparent,
       onChanged: (date) {
         if (kDebugMode) print('changed to $date');
