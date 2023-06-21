@@ -9,6 +9,7 @@ Future<DateTime?> showAwesomeDatePicker({
   required AwesomeDatePickerMode mode,
   required bool useAlpha,
   required Color backgroundColor,
+  ValueChanged<DateTime>? onChanged,
   DateTime? currentDate,
   String? helpText,
   Locale? locale,
@@ -26,6 +27,7 @@ Future<DateTime?> showAwesomeDatePicker({
   Widget dialog = _AwesomeDatePickerDialog(
     initialDate: initialDate,
     currentDate: currentDate,
+    onChanged: onChanged,
     helpText: helpText,
     errorInvalidText: errorInvalidText,
     mode: mode,
@@ -59,6 +61,7 @@ class _AwesomeDatePickerDialog extends StatefulWidget {
     required this.useAlpha,
     required DateTime initialDate,
     DateTime? currentDate,
+    this.onChanged,
     this.helpText,
     this.errorInvalidText,
     required this.backgroundColor,
@@ -78,6 +81,8 @@ class _AwesomeDatePickerDialog extends StatefulWidget {
   final bool useAlpha;
 
   final Color backgroundColor;
+
+  final ValueChanged<DateTime>? onChanged;
 
   /// The initially selected [DateTime] that the picker should display.
   final DateTime initialDate;
@@ -106,8 +111,10 @@ class _AwesomeDatePickerDialogState extends State<_AwesomeDatePickerDialog> {
 
   final GlobalKey _pickerKey = GlobalKey();
 
-  void _handleDateChanged(DateTime date) =>
-      setState(() => _selectedDate = date);
+  void _handleDateChanged(DateTime date) {
+    setState(() => _selectedDate = date);
+    widget.onChanged?.call(date);
+  }
 
   @override
   Widget build(BuildContext context) {
