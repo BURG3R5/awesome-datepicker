@@ -60,11 +60,23 @@ class Home extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(20),
                 child: GlowText(
-                  text: 'Click here and select your date of birth\n'
-                      'to unlock the secrets of the universe',
-                  glowColor: white,
                   style: Theme.of(context).textTheme.headlineSmall,
                   textAlign: TextAlign.center,
+                  glowColor: primary,
+                  textSpan: const TextSpan(
+                    children: <TextSpan>[
+                      TextSpan(text: "Click here and "),
+                      TextSpan(
+                        text: "select your date of birth",
+                        style: TextStyle(
+                          color: primary,
+                          fontWeight: FontWeight.bold,
+                          inherit: true,
+                        ),
+                      ),
+                      TextSpan(text: " to\nunlock the secrets of the universe"),
+                    ],
+                  ),
                 ),
               ),
             ),

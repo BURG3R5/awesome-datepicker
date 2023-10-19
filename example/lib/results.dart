@@ -31,15 +31,15 @@ class _ResultsState extends State<Results> {
             const Spacer(flex: 4),
             GlowText(
               text: DateFormat('d MMM y').format(birthdate ?? widget.birthdate),
-              glowColor: blue,
+              glowColor: primary,
               style: Theme.of(context)
                   .textTheme
                   .displayMedium
-                  ?.copyWith(color: blue),
+                  ?.copyWith(color: primary),
             ),
             const Spacer(flex: 2),
             GlowText(
-              glowColor: green,
+              glowColor: primary,
               textSpan: TextSpan(
                 children: <TextSpan>[
                   const TextSpan(text: "You have "),
@@ -48,7 +48,7 @@ class _ResultsState extends State<Results> {
                       birthdate ?? widget.birthdate,
                     ).toString(),
                     style: const TextStyle(
-                      color: green,
+                      color: primary,
                       fontWeight: FontWeight.bold,
                       inherit: true,
                     ),
@@ -59,7 +59,7 @@ class _ResultsState extends State<Results> {
             ),
             const Spacer(),
             GlowText(
-              glowColor: orange,
+              glowColor: primary,
               textSpan: TextSpan(
                 children: <TextSpan>[
                   const TextSpan(text: "You have "),
@@ -68,7 +68,7 @@ class _ResultsState extends State<Results> {
                       birthdate ?? widget.birthdate,
                     ).toString(),
                     style: const TextStyle(
-                      color: orange,
+                      color: primary,
                       fontWeight: FontWeight.bold,
                       inherit: true,
                     ),

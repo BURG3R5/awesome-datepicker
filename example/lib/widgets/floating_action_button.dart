@@ -4,7 +4,7 @@ import '../constants.dart';
 
 FloatingActionButton fab(VoidCallback onPressed) =>
     FloatingActionButton.extended(
-      backgroundColor: pink,
+      backgroundColor: primary,
       onPressed: onPressed,
       icon: const Icon(Icons.calendar_month, color: white),
       label: const Text('Pick again', style: TextStyle(color: white)),
