@@ -1,27 +1,55 @@
 # `awesome_datepicker`
 
-A Flutter widget where you select a date using a color picker
+Select dates by picking colors
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+This package can:
 
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+1. Display a color picker that outputs dates
+2. That's it
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
+You can use the async function `showAwesomeDatePicker` to trigger the picker dialog:
 
 ```dart
-const like = 'sample';
+var selectedDate = DateTime.now();
+
+await showAwesomeDatePicker(
+  context: context,
+  mode: AwesomeDatePickerMode.hex,
+  useAlpha: true,
+  initialDate: DateTime.now(),
+  backgroundColor: Colors.transparent,
+  onChanged: (date) {
+    if (kDebugMode) print('changed to $date');
+    selectedDate = date;
+  },
+);
 ```
+
+Alternatively, you can directly use the `AwesomeDatePicker` widget in your form or dialog:
+
+```dart
+// ...
+  child: AwesomeDatePicker(
+    initialDate: DateTime.now(),
+    mode: AwesomeDatePickerMode.hex,
+    colorPickerHeight: 250,
+    hueRingStrokeWidth: 20,
+    onDateChanged: (date) {
+      if (kDebugMode) print('changed to $date');
+      selectedDate = date;
+    },
+  ),
+// ...
+```
+
+For a more detailed example, explore the [sample app](/example/lib/main.dart). To test the limits of customization, check [dialog.dart](/lib/src/dialog.dart).
 
 ## Additional information
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+1. This is bad UI. It's not intended for use.
+2. There's a lot of stuff that can be added. I've left some TODOs for myself. I may or may not come around to them at an unknown time in the future.
+3. You can report bugs... but I ain't resolvin' none of 'em
