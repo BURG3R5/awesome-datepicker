@@ -91,7 +91,6 @@ class _ResultsState extends State<Results> {
       mode: AwesomeDatePickerMode.hex,
       useAlpha: true,
       initialDate: DateTime.now(),
-      backgroundColor: Colors.transparent,
       onChanged: (date) {
         if (kDebugMode) print('changed to $date');
 

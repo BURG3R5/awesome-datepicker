@@ -11,7 +11,7 @@ Future<DateTime?> showAwesomeDatePicker({
   required DateTime initialDate,
   required AwesomeDatePickerMode mode,
   required bool useAlpha,
-  required Color backgroundColor,
+  Color backgroundColor = Colors.transparent,
   ValueChanged<DateTime>? onChanged,
   DateTime? currentDate,
   String? helpText,
@@ -136,7 +136,6 @@ class _AwesomeDatePickerDialogState extends State<_AwesomeDatePickerDialog> {
               right: 0,
               child: InkWell(
                 borderRadius: BorderRadius.circular(widget.ringStrokeWidth * 4),
-                highlightColor: Colors.green,
                 onTap: () => displayHelpTextFor(widget.mode),
                 child: Icon(
                   Icons.help_outline,
