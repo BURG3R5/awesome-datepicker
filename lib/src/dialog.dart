@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'enums.dart';
 import 'picker.dart';
+import 'utils/color.dart';
 import 'utils/date.dart';
+import 'utils/help_text.dart';
 
 Future<DateTime?> showAwesomeDatePicker({
   required BuildContext context,
@@ -56,7 +58,6 @@ Future<DateTime?> showAwesomeDatePicker({
 }
 
 class _AwesomeDatePickerDialog extends StatefulWidget {
-  /// A Material-style date picker dialog.
   _AwesomeDatePickerDialog({
     required this.mode,
     required this.useAlpha,
@@ -120,26 +121,52 @@ class _AwesomeDatePickerDialogState extends State<_AwesomeDatePickerDialog> {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      clipBehavior: Clip.antiAlias,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(
-          widget.pickerHeight * 2,
-        ),
-      ),
       backgroundColor: widget.backgroundColor,
+      clipBehavior: Clip.antiAlias,
+      elevation: 0,
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
       child: SizedBox(
-        width: widget.pickerHeight * 1.12,
-        height: widget.pickerHeight * 1.12,
-        child: AwesomeDatePicker(
-          key: _pickerKey,
-          initialDate: _selectedDate,
-          mode: widget.mode,
-          useAlpha: widget.useAlpha,
-          backgroundColor: widget.backgroundColor,
-          currentDate: widget.currentDate,
-          onDateChanged: _handleDateChanged,
-          colorPickerHeight: widget.pickerHeight,
-          hueRingStrokeWidth: widget.ringStrokeWidth,
+        width: widget.pickerHeight * 1.2,
+        height: widget.pickerHeight * 1.2,
+        child: Stack(
+          alignment: Alignment.center,
+          children: <Widget>[
+            Positioned(
+              bottom: 0,
+              right: 0,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(widget.ringStrokeWidth * 4),
+                highlightColor: Colors.green,
+                onTap: () => displayHelpTextFor(widget.mode),
+                child: Icon(
+                  Icons.help_outline,
+                  size: widget.ringStrokeWidth * 1.5,
+                  color: widget.backgroundColor.getForeground(),
+                ),
+              ),
+            ),
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(widget.pickerHeight * 2),
+                color: widget.backgroundColor,
+              ),
+              child: SizedBox(
+                width: widget.pickerHeight * 1.12,
+                height: widget.pickerHeight * 1.12,
+                child: AwesomeDatePicker(
+                  key: _pickerKey,
+                  initialDate: _selectedDate,
+                  mode: widget.mode,
+                  useAlpha: widget.useAlpha,
+                  backgroundColor: widget.backgroundColor,
+                  currentDate: widget.currentDate,
+                  onDateChanged: _handleDateChanged,
+                  colorPickerHeight: widget.pickerHeight,
+                  hueRingStrokeWidth: widget.ringStrokeWidth,
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
