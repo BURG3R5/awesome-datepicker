@@ -1,6 +1,6 @@
 name: awesome_datepicker
 description: A sleek widget that lets your users input dates using a color picker!
-version: 0.0.2
+version: 0.1.0
 homepage: https://adityarajput.co/awesome_datepicker
 
 environment:
