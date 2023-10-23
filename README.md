@@ -3,7 +3,7 @@
 Select dates by picking colors
 
 <p align="center">
-  <img src="https://github.com/BURG3R5/awesome-datepicker/assets/77491630/1feb14c6-958d-4e08-99eb-52dc9a16f258" alt="a screenshot of the AwesomeDatePicker widget against a black background"/>
+  <img src="https://github.com/BURG3R5/awesome-datepicker/assets/77491630/a4719e9f-c629-4466-ab82-9550a498c4f7" alt="a screenshot of the AwesomeDatePicker widget against a black background"/>
 </p>
 
 ## Features

@@ -1,3 +1,10 @@
+## [0.1.1](https://github.com/BURG3R5/awesome-datepicker/releases/tag/0.1.1) - 2023-10-24
+
+### Changed
+
+- screenshot in README
+- homepage link
+
 ## [0.1.0](https://github.com/BURG3R5/awesome-datepicker/releases/tag/0.1.0) - 2023-10-24
 
 ### Added
