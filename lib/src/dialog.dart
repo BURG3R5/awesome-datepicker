@@ -133,12 +133,25 @@ class _AwesomeDatePickerDialogState extends State<_AwesomeDatePickerDialog> {
           children: <Widget>[
             Positioned(
               bottom: 0,
-              right: 0,
+              left: 0,
               child: InkWell(
                 borderRadius: BorderRadius.circular(widget.ringStrokeWidth * 4),
                 onTap: () => displayHelpTextFor(widget.mode),
                 child: Icon(
                   Icons.help_outline,
+                  size: widget.ringStrokeWidth * 1.5,
+                  color: widget.backgroundColor.getForeground(),
+                ),
+              ),
+            ),
+            Positioned(
+              bottom: 0,
+              right: 0,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(widget.ringStrokeWidth * 4),
+                onTap: () => Navigator.of(context).pop<DateTime>(_selectedDate),
+                child: Icon(
+                  Icons.check_circle_outline,
                   size: widget.ringStrokeWidth * 1.5,
                   color: widget.backgroundColor.getForeground(),
                 ),

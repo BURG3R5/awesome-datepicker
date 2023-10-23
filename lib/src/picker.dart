@@ -158,19 +158,11 @@ class _AwesomeDatePickerState extends State<AwesomeDatePicker> {
         ),
         Positioned(
           top: widget.colorPickerHeight / 6.5,
-          child: GestureDetector(
-            onTap: () => Navigator.of(context).pop<DateTime>(
-              currentColor.toDate(
-                mode: widget.mode,
-                enableAlpha: widget.useAlpha,
-              ),
-            ),
-            child: Output(
-              currentColor.toColor(),
-              mode: widget.mode,
-              enableAlpha: widget.useAlpha,
-              backgroundColor: widget.backgroundColor,
-            ),
+          child: Output(
+            currentColor.toColor(),
+            mode: widget.mode,
+            enableAlpha: widget.useAlpha,
+            backgroundColor: widget.backgroundColor,
           ),
         ),
       ],
