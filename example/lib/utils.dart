@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
 int _calculateDaysLeft(DateTime birthdate) {
   final expectedDeath =
       birthdate.add(Duration(hours: (72.27 * 365.2425 * 24).floor()));
@@ -15,5 +18,20 @@ int calculateFullMoons(DateTime birthdate) =>
 int calculateTotalSolarEclipses(DateTime birthdate) =>
     (0.66 * _calculateDaysLeft(birthdate)) ~/ 365.2425;
 
-bool areDayAndMonthEqual(DateTime d1, DateTime d2) =>
-    d1.day == d2.day && d1.month == d2.month;
+bool isPortrait(BuildContext context) {
+  return context.width < context.height;
+}
+
+TextStyle? buttonTextStyle(BuildContext context) {
+  return Theme.of(context).textTheme.headlineSmall?.copyWith(
+        fontSize: isPortrait(context) ? 15 * context.width / 375 : null,
+      );
+}
+
+double pickerHeight(BuildContext context) {
+  return isPortrait(context) ? 250 * 0.7 * context.width / 375 : 250;
+}
+
+double ringWidth(BuildContext context) {
+  return isPortrait(context) ? 20 * 0.7 * context.width / 375 : 20;
+}

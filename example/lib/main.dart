@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'constants.dart';
 import 'results.dart';
+import 'utils.dart';
 import 'widgets/glow_text.dart';
 
 void main() => runApp(const ExampleApp());
@@ -34,6 +35,8 @@ class Home extends StatelessWidget {
       mode: AwesomeDatePickerMode.hex,
       useAlpha: true,
       initialDate: DateTime.now(),
+      pickerHeight: pickerHeight(context),
+      ringStrokeWidth: ringWidth(context),
       onChanged: (date) {
         if (kDebugMode) print('changed to $date');
 
@@ -59,7 +62,7 @@ class Home extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(20),
                 child: GlowText(
-                  style: Theme.of(context).textTheme.headlineSmall,
+                  style: buttonTextStyle(context),
                   textAlign: TextAlign.center,
                   glowColor: primary,
                   textSpan: const TextSpan(

@@ -91,6 +91,8 @@ class _ResultsState extends State<Results> {
       mode: AwesomeDatePickerMode.hex,
       useAlpha: true,
       initialDate: DateTime.now(),
+      pickerHeight: pickerHeight(context),
+      ringStrokeWidth: ringWidth(context),
       onChanged: (date) {
         if (kDebugMode) print('changed to $date');
 
