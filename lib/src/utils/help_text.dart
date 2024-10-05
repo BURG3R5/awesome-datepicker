@@ -9,9 +9,7 @@ void displayHelpTextFor(AwesomeDatePickerMode mode) {
 
   switch (mode) {
     case AwesomeDatePickerMode.hex:
-      helpText = "Select a color: use the ring for Hue, the slider for Alpha\n"
-          "and the square for Saturation and Value. Your chosen\n"
-          "color's hexcode will be treated as UNIX time after 1970.";
+      helpText = "ring = Hue, slider = Alpha,\nsquare = Saturation & Value";
       break;
     case AwesomeDatePickerMode.hsv:
     case AwesomeDatePickerMode.rgb:
@@ -19,8 +17,7 @@ void displayHelpTextFor(AwesomeDatePickerMode mode) {
     case AwesomeDatePickerMode.rgba:
       // TODO: Handle these cases
       helpText = "The developer hasn't yet implemented this mode.\n"
-          "Please complain loudly and frequently. Force him to\n"
-          "get off his arse and finishes his work on this package.";
+          "Please complain!";
   }
 
   Fluttertoast.showToast(
