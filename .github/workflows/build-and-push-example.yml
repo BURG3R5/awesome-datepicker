@@ -1,0 +1,24 @@
+name: Build and push Docker image (of example website)
+
+on:
+  push:
+    branches: [ "master" ]
+  workflow_dispatch:
+
+jobs:
+  build-and-push-example:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build image
+        run: docker build . --file example.Dockerfile --tag burgers1312/private-repository:awesome_datepicker_example
+
+      - name: Log in
+        run: docker login -u burgers1312 -p $DOCKER_PAT
+        env:
+          DOCKER_PAT: ${{ secrets.DOCKER_PAT }}
+
+      - name: Push image
+        run: docker push burgers1312/private-repository:awesome_datepicker_example
