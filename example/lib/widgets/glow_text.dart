@@ -48,10 +48,6 @@ class GlowText extends Text {
     if (style == null || style!.inherit) {
       effectiveTextStyle = defaultTextStyle.style.merge(style);
     }
-    if (MediaQuery.boldTextOverride(context)) {
-      effectiveTextStyle = effectiveTextStyle!
-          .merge(const TextStyle(fontWeight: FontWeight.bold));
-    }
 
     effectiveTextStyle = effectiveTextStyle!.merge(
       TextStyle(
@@ -76,7 +72,6 @@ class GlowText extends Text {
       locale: locale,
       softWrap: softWrap ?? defaultTextStyle.softWrap,
       overflow: overflow ?? defaultTextStyle.overflow,
-      textScaleFactor: textScaleFactor ?? MediaQuery.textScaleFactorOf(context),
       maxLines: maxLines ?? defaultTextStyle.maxLines,
       strutStyle: strutStyle,
       textWidthBasis: textWidthBasis ?? defaultTextStyle.textWidthBasis,
