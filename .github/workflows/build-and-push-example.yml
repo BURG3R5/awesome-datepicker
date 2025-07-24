@@ -1,9 +1,13 @@
-name: Build and push Docker image (of example website)
+name: build and push example
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "main" ]
   workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
 
 jobs:
   build-and-push-example:
@@ -12,13 +16,36 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Build image
-        run: docker build . --file example.Dockerfile --tag burgers1312/private-repository:awesome_datepicker_example
-
-      - name: Log in
-        run: docker login -u burgers1312 -p $DOCKER_PAT
+      - name: Configure credentials
+        uses: aws-actions/configure-aws-credentials@v1.7.0
+        with:
+            role-to-assume: $AWS_ROLE
+            aws-region: ap-south-1
         env:
-          DOCKER_PAT: ${{ secrets.DOCKER_PAT }}
+          AWS_ROLE: ${{ secrets.AWS_ROLE }}
+    
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: 3.24.3
 
-      - name: Push image
-        run: docker push burgers1312/private-repository:awesome_datepicker_example
+      - name: Build example
+        run: |
+          cd example
+          flutter build web
+
+      - name: Copy files
+        run: |
+          docker run --name example example
+          docker cp example:/app/example/build/web ./build
+
+      - name: Push files
+        run: aws s3 sync ./build/ $AWS_S3_BUCKET --delete
+        env:
+          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+
+      - name: Invalidate cache
+        run: aws cloudfront create-invalidation --distribution-id $AWS_CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
+        env:
+          AWS_CLOUDFRONT_DISTRIBUTION_ID: ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION_ID }}
