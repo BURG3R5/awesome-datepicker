@@ -19,10 +19,8 @@ jobs:
       - name: Configure credentials
         uses: aws-actions/configure-aws-credentials@v1.7.0
         with:
-            role-to-assume: $AWS_ROLE
+            role-to-assume: ${{ secrets.AWS_ROLE }}
             aws-region: ap-south-1
-        env:
-          AWS_ROLE: ${{ secrets.AWS_ROLE }}
     
       - name: Install Flutter
         uses: subosito/flutter-action@v2
