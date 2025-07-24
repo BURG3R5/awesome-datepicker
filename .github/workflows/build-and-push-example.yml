@@ -33,13 +33,8 @@ jobs:
           cd example
           flutter build web
 
-      - name: Copy files
-        run: |
-          docker run --name example example
-          docker cp example:/app/example/build/web ./build
-
       - name: Push files
-        run: aws s3 sync ./build/ $AWS_S3_BUCKET --delete
+        run: aws s3 sync ./example/build/web/ $AWS_S3_BUCKET --delete
         env:
           AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
 
